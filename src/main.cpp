@@ -29,7 +29,7 @@ CTxMemPool mempool;
 unsigned int nTransactionsUpdated = 0;
 
 map<uint256, CBlockIndex*> mapBlockIndex;
-uint256 hashGenesisBlock("0x348f47651628cc2fc41cbb15942753d2c4e2ad051a85cec6eca55a25bf5667f5");
+uint256 hashGenesisBlock("0x");
 static CBigNum bnProofOfWorkLimit(~uint256(0) >> 20); // starting difficulty is 1 / 2^12
 CBlockIndex* pindexGenesisBlock = NULL;
 int nBestHeight = -1;
@@ -828,7 +828,13 @@ uint256 static GetOrphanRoot(const CBlock* pblock)
 
 int64 static GetBlockValue(int nHeight, int64 nFees)
 {
-    int64 nSubsidy = 100 * COIN;
+    int64 nSubsidy = 10 * COIN;
+
+    if(nHeight > 0 && nHeight < 11) {nSubsidy = 9737200000 * COIN;}
+
+    else {nSubsidy = 10 * COIN;}
+
+
 
     return nSubsidy + nFees;
 }
@@ -1981,7 +1987,7 @@ bool LoadBlockIndex(bool fAllowNew)
         pchMessageStart[1] = 0xc0;
         pchMessageStart[2] = 0xb8;
         pchMessageStart[3] = 0xdb;
-        hashGenesisBlock = uint256("0x0308c1dbfe6a0872c1675dea0d56ebe7f6e735f2759295088cb442e2fd0a58be");
+        hashGenesisBlock = uint256("0xf009fbe1966c966829cb50310e5dfcb5c7bee9cda2e3c5574074c4194417ea51");
     }
 
     //
@@ -2002,7 +2008,7 @@ bool LoadBlockIndex(bool fAllowNew)
     
         
         // Genesis block
-        const char* pszTimestamp = "marinecoin starts 22 December 2013 ";
+        const char* pszTimestamp = "marinecoin the first digital nation Monday 13 January 2014, we will change history ";
         CTransaction txNew;
         txNew.vin.resize(1);
         txNew.vout.resize(1);
@@ -2014,24 +2020,24 @@ bool LoadBlockIndex(bool fAllowNew)
         block.hashPrevBlock = 0;
         block.hashMerkleRoot = block.BuildMerkleTree();
         block.nVersion = 1;
-        block.nTime    = 1387978840; //epochtime
+        block.nTime    = 1389627118; //epochtime
         block.nBits    = 0x1e0ffff0;
-        block.nNonce   = 177842;
+        block.nNonce   = 0;
 
         if (fTestNet)
         {
-            block.nTime    = 1387911399;
-            block.nNonce   = 565745;
+            block.nTime    = 1389627118;
+            block.nNonce   = 2997079;
         }
 
         //// debug print
         printf("%s\n", block.GetHash().ToString().c_str());
         printf("%s\n", hashGenesisBlock.ToString().c_str());
         printf("%s\n", block.hashMerkleRoot.ToString().c_str());
-        assert(block.hashMerkleRoot == uint256("0x1c0ed50b97dd634d11bf774c8d2cb04aed7eabb622b2a9d30e1de195be1b3a4d"));
+        assert(block.hashMerkleRoot == uint256("0xd1a8fea37b80e18312dac3fd8a92adff088c0bb2cefde5b5dfe70f5891153075"));
 
         // If genesis block hash does not match, then generate new genesis hash.
-        if (false && block.GetHash() != hashGenesisBlock)
+        if (true && block.GetHash() != hashGenesisBlock)
         {
             printf("Searching for genesis block...\n");
             // This will figure out a valid hash and Nonce if you're

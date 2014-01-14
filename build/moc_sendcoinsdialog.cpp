@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'sendcoinsdialog.h'
 **
-** Created: Sat Dec 28 18:33:32 2013
+** Created: Mon Jan 13 23:30:52 2014
 **      by: The Qt Meta Object Compiler version 63 (Qt 4.8.2)
 **
 ** WARNING! All changes made in this file will be lost!
